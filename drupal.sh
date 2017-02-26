@@ -3,16 +3,19 @@
 #
 . ./functions.sh
 # Check who is running this scription. Runner should be root.
-if [ "$(whoami)" != 'root' ]; then
-	echo $"You have no permission to run $0 as non-root user. Use sudo"
-		exit 1;
-fi
+#if [ "$(whoami)" != 'root' ]; then
+#	echo $"You have no permission to run $0 as non-root user. Use sudo"
+#		exit 1;
+#fi
+
+
+
+
 
 #
 # Do you want to create site for BI or Nitro or others.
 #
-
-
+get_server_info() {
 PS3='Do you want to configure which server site: '
 options=("BI Int" "Nitro Dev" "Others" "Quit")
 select opt in "${options[@]}"
@@ -20,12 +23,15 @@ do
     case $opt in
         "BI Int")
            bi
+           break 
             ;;
         "Nitro Dev")
            nitro
+           break
             ;;
         "Others")
            other
+           break
             ;;
         "Quit")
             break
@@ -34,17 +40,8 @@ do
     esac
 done
 
+}
 
 
-
-# Check directory exist ~/.drush
-
-drush_dir=~/.drush
-if [ ! -d "$drush_dir" ]; then
-  mkdir $drush_dir
-  if [ ! -d "$drush_dir" ]; then 
-    echo "Script has tried to create the $drush_dir. Please create manually"
-    exit 1;
-  fi
-fi
+#get_server_info
 

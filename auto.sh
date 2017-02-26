@@ -1,7 +1,7 @@
 #!/bin/bash
 # Configure Virtual and Remove Virtual.
 
-
+. ./drupal.sh
 # Check who is running this scription. Runner should be root.
 if [ "$(whoami)" != 'root' ]; then
 	echo $"You have no permission to run $0 as non-root user. Use sudo"
@@ -36,11 +36,6 @@ read drupal_dir
 
 drupal_path=$sites_dir/$drupal_dir
 
-if [ ! -d "$drupal_path" ]; then
-  echo "Site does not exist on $drupal_path"
-  exit 1;
-fi 
-
 echo "Enter your site local url($drupal_dir)"
 read site_url
 
@@ -53,6 +48,17 @@ fi;
         echo "Site URL contains the space. Replace space with dash, dot or under score" >&2
         exit 1
  fi
+
+if [ -d "$drupal_path" ]; then
+  echo "Site diresctory with same name $drupal_path already exist"
+  exit 1;
+fi 
+# Ask about server info.
+get_server_info
+
+
+
+
 
 
 
