@@ -9,12 +9,12 @@ if [ "$(whoami)" != 'root' ]; then
 fi
 
 # Get the Drupal Directory path.
-echo "Enter your sites location(/Library/WebServer/Documents)"
+echo "Enter your sites location($NITROSH_SITES_DIR)"
 read sites_dir
 
 # If user press Enter we will use default path.
 if [[ -z "$sites_dir" ]]; then
-  sites_dir="/Library/WebServer/Documents"
+  sites_dir="$NITROSH_SITES_DIR"
 fi;
 
 # Make sure directory is exist.

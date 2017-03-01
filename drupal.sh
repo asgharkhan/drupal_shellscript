@@ -29,7 +29,7 @@ do
            nitro
            break
             ;;
-        "Others")
+        "Other")
            other
            break
             ;;

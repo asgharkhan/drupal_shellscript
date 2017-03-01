@@ -31,7 +31,7 @@ $aliases['local'] = array(
   'root' => '@local_doc',
   'uri'  => '@local_url',
   'path-aliases' => array(
-    '%dump-dir' => '/tmp',
+    '%dump-dir' => '~/.drsuh/drush_dump',
   ),
 );
 
@@ -56,6 +56,9 @@ $aliases['int'] = array (
   ),
   // No need to modify the following settings
   'command-specific' => array (
+    'rsync' => array(
+      'mode' => 'rlptDvz',
+    ),
     'sql-sync' => array (
       'sanitize' => TRUE,
       'no-ordered-dump' => TRUE,
