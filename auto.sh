@@ -1,7 +1,8 @@
 #!/bin/bash
 # Configure Virtual and Remove Virtual.
-
-. ./drupal.sh
+DIR="${BASH_SOURCE%/*}"
+if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
+. "$DIR/drupal.sh"
 # Check who is running this scription. Runner should be root.
 if [ "$(whoami)" != 'root' ]; then
 	echo $"You have no permission to run $0 as non-root user. Use sudo"
@@ -26,6 +27,11 @@ fi
 # Get the Drupal Directory.
 echo "Enter Drupal Root Directory name under sites Directory"
 read drupal_dir
+
+if [[ -z "$drupal_dir" ]]; then
+  echo "Drupal Directory path is required".
+  exit 1;
+fi;
 
 # Check directory Name does not contain the space.
  if [[ "$drupal_dir" != "${drupal_dir/ /}" ]]

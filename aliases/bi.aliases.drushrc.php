@@ -31,7 +31,7 @@ $aliases['local'] = array(
   'root' => '@local_doc',
   'uri'  => '@local_url',
   'path-aliases' => array(
-    '%dump-dir' => '~/.drsuh/drush_dump',
+    '%dump-dir' => '~/.drush/drush_dump',
   ),
 );
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Create drush alliases and sync database and source code.
 #
-. ./functions.sh
+. "$DIR/functions.sh"
 # Check who is running this scription. Runner should be root.
 #if [ "$(whoami)" != 'root' ]; then
 #	echo $"You have no permission to run $0 as non-root user. Use sudo"
