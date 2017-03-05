@@ -42,15 +42,17 @@ echo "Document Int value is $int_doc_root"
 configure_drupal() {
 
  echo "drush rsync @$site_url.int @$site_url.local executed. Please wait a while"
- drush rsync -r -v --progress @$site_url.int @$site_url.local
+ # drush rsync -r -v --progress @$site_url.int @$site_url.local
+drush rsync @$site_url.int @$site_url.local
  echo "Site downded" 
  # Get the Mac current user.
   _user="$(id -u -n)"
 
  #Set the Drupal directories and file permissions.
 
- sudo bash "$DIR/fix-permissions.sh" --drupal_path=$drupal_path --drupal_user=$_user
- sudo chown -r $_user $drupal_path
+ #sudo bash "$DIR/fix-permissions.sh" --drupal_path=$drupal_path --drupal_user=$_user
+ sudo chown -R $SUDO_USER $drupal_path
+ echo "chown -R $SUDO_USER $drupal_path"
  echo "Set the directory permissions" 
  
 db_name="${site_url//[ \.\-]/_}"

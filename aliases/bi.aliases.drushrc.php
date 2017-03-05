@@ -31,7 +31,7 @@ $aliases['local'] = array(
   'root' => '@local_doc',
   'uri'  => '@local_url',
   'path-aliases' => array(
-    '%dump-dir' => '~/.drush/drush_dump',
+   // '%dump-dir' => '~/.drush/drush_dump',
   ),
 );
 
@@ -46,7 +46,7 @@ $aliases['int'] = array (
   'remote-host' => '@dev_host',
  // 'ssh-options'  => '-p 2222',  // To change the default port on remote server
   'path-aliases' => array(
-    '%dump-dir' => '/tmp',
+   // '%dump-dir' => '/tmp',
   ),
   'source-command-specific' => array (
     'sql-sync' => array (

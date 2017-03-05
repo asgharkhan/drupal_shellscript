@@ -3,11 +3,15 @@
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
 . "$DIR/drupal.sh"
+
+echo "Current user is $SUDO_USER"
 # Check who is running this scription. Runner should be root.
 if [ "$(whoami)" != 'root' ]; then
 	echo $"You have no permission to run $0 as non-root user. Use sudo"
 		exit 1;
 fi
+ printf '%s\n' "${SUDO_USER:-$USER}"
+
 
 # Get the Drupal Directory path.
 echo "Enter your sites location($NITROSH_SITES_DIR)"
@@ -63,12 +67,7 @@ fi
 get_server_info
 
 
-
-
-
-
-
-nitro_apache="/etc/apache2/nitro-drupal"
+nitro_apache=/etc/apache2/$NITROSH_APACHE_DIR
 if [ ! -d "$nitro_apache" ]; then
   mkdir $nitro_apache
   if [ ! -d "$nitro_apache" ]; then 
@@ -77,6 +76,13 @@ if [ ! -d "$nitro_apache" ]; then
   fi
 fi
 
+nitrosh_include="include /private/etc/apache2/$NITROSH_APACHE_DIR/*.conf"
+if grep -qF "$nitrosh_include" $NITROSH_SYSTEM_APACHE ; then
+   echo "Found it"
+else
+   echo "$nitrosh_include" >> $NITROSH_SYSTEM_APACHE
+   echo "Inserted into $NITROSH_SYSTEM_APACHE"
+fi
 
 echo "
 <VirtualHost *:80>
@@ -93,3 +99,5 @@ echo "
 
 # Add the host entry file
  echo 127.0.0.1 $site_url >> /etc/hosts
+
+sudo apachectl restart
